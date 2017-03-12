@@ -44,7 +44,7 @@
                     <navigationItem key="navigationItem" title="Checklist" id="Brq-FE-JN2">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="d6n-G0-fa3">
                             <connections>
-                                <segue destination="FgK-hW-nGZ" kind="presentation" id="oVR-Qv-hMP"/>
+                                <segue destination="FgK-hW-nGZ" kind="presentation" identifier="AddItem" id="oVR-Qv-hMP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -78,7 +78,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
-                                                        <action selector="delete" destination="3Sf-mx-fme" eventType="editingDidEndOnExit" id="oq7-Dw-0Ea"/>
+                                                        <action selector="done" destination="3Sf-mx-fme" eventType="editingDidEndOnExit" id="dql-hA-bF8"/>
                                                         <outlet property="delegate" destination="3Sf-mx-fme" id="OgH-Mf-QwL"/>
                                                     </connections>
                                                 </textField>
@@ -101,7 +101,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" style="done" systemItem="done" id="r1x-9S-ztY">
                             <connections>
-                                <action selector="delete" destination="3Sf-mx-fme" id="qYy-F7-Omr"/>
+                                <action selector="done" destination="3Sf-mx-fme" id="EbR-AV-N80"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
