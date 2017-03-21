@@ -106,7 +106,6 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         lists.remove(at: indexPath.row)
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
-        //saveChecklistItems()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
