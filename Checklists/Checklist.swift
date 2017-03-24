@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Checklist: NSObject {
+class Checklist: NSObject, NSCoding {
     var name = ""
     var items = [ChecklistItem]()
     
@@ -17,5 +17,24 @@ class Checklist: NSObject {
         self.name = name
         super.init()
     }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "Name")
+        aCoder.encode(items, forKey: "Items")
+        // It is method for save text and cheked in Checklist.plist
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        name = aDecoder.decodeObject(forKey: "Name") as! String
+        items = aDecoder.decodeObject(forKey: "Items") as! [ChecklistItem]
+        super.init()
+        // This is the method for unfreezing the objects from the file.
+    }
+    
+    override init() {
+        super.init()
+        // It doesn’t do anything useful, but it keeps the compiler happy.
+    }
+
 
 }

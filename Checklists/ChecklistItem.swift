@@ -12,6 +12,11 @@ class ChecklistItem : NSObject, NSCoding {
     var text = ""
     var checked = false
     
+    override init() {
+        super.init()
+        // It doesn’t do anything useful, but it keeps the compiler happy.
+    }
+    
     func toggleChecked() {
         checked = !checked
     }
@@ -27,11 +32,6 @@ class ChecklistItem : NSObject, NSCoding {
         checked = aDecoder.decodeBool(forKey: "Checked")
         super.init()
         // This is the method for unfreezing the objects from the file.
-    }
-    
-    override init() {
-        super.init()
-        // It doesn’t do anything useful, but it keeps the compiler happy.
     }
 
 }
