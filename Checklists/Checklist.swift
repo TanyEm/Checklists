@@ -35,6 +35,12 @@ class Checklist: NSObject, NSCoding {
         super.init()
         // It doesn’t do anything useful, but it keeps the compiler happy.
     }
-
-
+    
+    func countUncheckedItems() -> Int {
+        var count = 0
+        for item in items where !item.checked {
+            count += 1
+        }
+        return count
+    }
 }

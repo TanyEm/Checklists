@@ -103,7 +103,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
             controller.itemToEdit = checklist.items[indexPath.row]
             }
         }
-
     }
+    
 }
 
