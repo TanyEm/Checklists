@@ -10,6 +10,18 @@ import UIKit
 
 class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
     var dataModel: DataModel!
+    
+    @IBOutlet weak var sortControl: UISegmentedControl!
+    @IBAction func switchSort(_ sender: UISegmentedControl) {
+//        if(sortControl.selectedSegmentIndex == 0) {
+//            dataModel.sortNameChecklists()
+//        } else (sortControl.selectedSegmentIndex == 1) {
+//            dataModel.sortedLists
+//        }
+        
+        self.tableView.reloadData()
+    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +63,17 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = makeCell(for: tableView)
-        let checklist = dataModel.lists[indexPath.row]
+        var sortItem:[Checklist]
+        
+        if(sortControl.selectedSegmentIndex == 0) {
+            sortItem = dataModel.sortedLists
+        } else {
+            sortItem = dataModel.lists
+        }
+        
+        let checklist = sortItem[indexPath.row]
         cell.textLabel!.text = checklist.name
+        
         
         let count = checklist.countUncheckedItems()
         if checklist.items.count == 0 {
@@ -117,13 +138,13 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAdding checklist: Checklist) {
         dataModel.lists.append(checklist)
-        dataModel.sortChecklists()
+//        dataModel.sortNameChecklists()
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditing checklist: Checklist) {
-        dataModel.sortChecklists()
+//        dataModel.sortNameChecklists()
         tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }

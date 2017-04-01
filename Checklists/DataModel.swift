@@ -10,6 +10,13 @@ import Foundation
 
 class DataModel {
     var lists = [Checklist]()
+    var sortedLists:[Checklist] {
+        return lists.sorted (by: {
+            checklist1, checklist2 in
+                let unchecked1 = checklist1.countUncheckedItems()
+                let unchecked2 = checklist2.countUncheckedItems()
+                return unchecked1 > unchecked2})
+                }
     
     init() {
         loadChecklists()
@@ -40,7 +47,7 @@ class DataModel {
             let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
             lists = unarchiver.decodeObject(forKey: "Checklists") as! [Checklist]
             unarchiver.finishDecoding()
-            sortChecklists()
+            sortNameChecklists()
         }
     }
     func registerDefaults() {
@@ -70,7 +77,7 @@ class DataModel {
         }
     }
     
-    func sortChecklists() {
+    func sortNameChecklists() {
         lists.sort(by: { checklist1, checklist2 in
             return checklist1.name.localizedStandardCompare(checklist2.name) == .orderedAscending })
     }
