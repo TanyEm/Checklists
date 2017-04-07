@@ -12,28 +12,27 @@ class Checklist: NSObject, NSCoding {
     var name = ""
     var items = [ChecklistItem]()
     
+    var iconName: String
     
     init(name: String) {
         self.name = name
+        iconName = "No Icon"
         super.init()
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "Name")
-        aCoder.encode(items, forKey: "Items")
-        // It is method for save text and cheked in Checklist.plist
     }
     
     required init?(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObject(forKey: "Name") as! String
         items = aDecoder.decodeObject(forKey: "Items") as! [ChecklistItem]
+        iconName = aDecoder.decodeObject(forKey: "IconName") as! String
         super.init()
         // This is the method for unfreezing the objects from the file.
     }
     
-    override init() {
-        super.init()
-        // It doesn’t do anything useful, but it keeps the compiler happy.
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "Name")
+        aCoder.encode(items, forKey: "Items")
+        aCoder.encode(iconName, forKey: "IconName")
+        // It is method for save text,icon and cheked in Checklist.plist
     }
     
     func countUncheckedItems() -> Int {

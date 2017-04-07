@@ -15,13 +15,15 @@ protocol ListDetailViewControllerDelegate: class {
 }
 
 
-class ListDetailViewController: UITableViewController, UITextFieldDelegate {
+class ListDetailViewController: UITableViewController, UITextFieldDelegate, IconPickerViewControllerDelegate {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    @IBOutlet weak var iconImageView: UIImageView!
     
     weak var delegate: ListDetailViewControllerDelegate?
     
+    var iconName = "Folder"
     var checklistToEdit: Checklist?
     
 
@@ -32,7 +34,9 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
             title = "Edit Checklist"
             textField.text = checklist.name
             doneBarButton.isEnabled = true
+            iconName = checklist.iconName
         }
+        iconImageView.image = UIImage(named: iconName)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -48,10 +52,12 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func done() {
         if let checklist = checklistToEdit {
             checklist.name = textField.text!
+            checklist.iconName = iconName
             delegate?.listDetailViewController(self, didFinishEditing: checklist)
         } else {
             let checklist = Checklist(name: textField.text!)
             checklist.name = textField.text!
+            checklist.iconName = iconName
             delegate?.listDetailViewController(self, didFinishAdding: checklist)
         }
     }
@@ -67,8 +73,13 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
-        //make sure the user cannot select the table cell with the text field
+        if indexPath.section == 1 {
+            return indexPath
+            //this method should return the index-path for that cell
+        } else {
+            return nil
+            //make sure the user cannot select the table cell with the text field
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -79,4 +90,16 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         // It is  text field delegate method that enables or disables the Done button depending on whether the text field is empty or not.
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PickIcon" {
+            let controller = segue.destination as! IconPickerViewController
+            controller.delegate = self
+        }
+    }
+    
+    func iconPicker(_ picker: IconPickerViewController, didPick iconName: String) {
+        self.iconName = iconName
+        iconImageView.image = UIImage(named: iconName)
+        let _ = navigationController?.popViewController(animated: true)
+    }
 }

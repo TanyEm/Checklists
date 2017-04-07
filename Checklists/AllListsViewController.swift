@@ -85,6 +85,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         }
         
         cell.accessoryType = .detailDisclosureButton
+        cell.imageView!.image = UIImage(named: checklist.iconName)
         // Configure the cell...
 
         return cell
