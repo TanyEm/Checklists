@@ -14,9 +14,18 @@ class Checklist: NSObject, NSCoding {
     
     var iconName: String
     
-    init(name: String) {
+    /*  init(name) for when you just have a name
+        init(name, iconName) for when you also have an icon name 
+        init?(coder) for loading the objects from the plist file
+    */
+ 
+    convenience init(name: String) {
+        self.init(name: name, iconName: "No Icon")
+    }
+    
+    init(name: String, iconName: String) {
         self.name = name
-        iconName = "No Icon"
+        self.iconName = iconName
         super.init()
     }
     
