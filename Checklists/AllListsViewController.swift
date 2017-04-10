@@ -66,9 +66,9 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         var sortItem:[Checklist]
         
         if(sortControl.selectedSegmentIndex == 0) {
-            sortItem = dataModel.sortedLists
-        } else {
             sortItem = dataModel.lists
+        } else {
+            sortItem = dataModel.sortedLists
         }
         
         let checklist = sortItem[indexPath.row]
