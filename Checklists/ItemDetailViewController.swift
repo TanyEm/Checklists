@@ -19,8 +19,11 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    @IBOutlet weak var shouldRemindSwitch: UISwitch!
+    @IBOutlet weak var dueDateLabel: UILabel!
     
     var itemToEdit: ChecklistItem?
+    var dueDate = Date()
     
     weak var delegate: ItemDetailViewControllerDelegate?
     
@@ -30,7 +33,10 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             title = "Edit Item"
             textField.text = item.text
             doneBarButton.isEnabled = true
+            shouldRemindSwitch.isOn = item.shouldRemind
+            dueDate = item.dueDate
         }
+        updateDueDateLabel()
     }
     
     @IBAction func cancel() {
@@ -41,11 +47,15 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
 
         if let item = itemToEdit {
             item.text = textField.text!
+            item.dueDate = dueDate
+            item.shouldRemind = shouldRemindSwitch.isOn
             delegate?.itemDetailViewController(self, didFinishEditing: item)
         } else {
             let item = ChecklistItem()
             item.text = textField.text!
             item.checked = false
+            item.dueDate = dueDate
+            item.shouldRemind = shouldRemindSwitch.isOn
             delegate?.itemDetailViewController(self, didFinishAdding: item)
         }
     }
@@ -67,4 +77,10 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
     
+    func updateDueDateLabel() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        dueDateLabel.text = formatter.string(from: dueDate)
+    }
 }

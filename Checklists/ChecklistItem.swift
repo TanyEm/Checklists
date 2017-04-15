@@ -17,7 +17,7 @@ class ChecklistItem : NSObject, NSCoding {
     
     override init() {
         // This asks the DataModel object for a new item ID whenever the app creates a new ChecklistItem object.
-        itemID = DataModel.nextChecklistItemID(
+        itemID = DataModel.nextChecklistItemID()
         super.init()
     }
     
