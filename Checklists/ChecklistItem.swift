@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 class ChecklistItem : NSObject, NSCoding {
     var text = ""
@@ -43,6 +44,27 @@ class ChecklistItem : NSObject, NSCoding {
         aCoder.encode(shouldRemind, forKey: "ShouldRemind")
         aCoder.encode(itemID, forKey: "ItemID")
         // It is method for save text and cheked in Checklist.plist
+    }
+    
+    func scheduleNotification() {
+        if shouldRemind && dueDate > Date() {
+            let content = UNMutableNotificationContent()
+            content.title = "Reminder:"
+            content.body = text
+            content.sound = UNNotificationSound.default()
+            
+            let calendar = Calendar(identifier: .gregorian)
+            let components = calendar.dateComponents([.month, .day, .hour, .minute], from: dueDate)
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "\(itemID)", content: content, trigger: trigger)
+            
+            let center = UNUserNotificationCenter.current()
+            center.add(request)
+            
+            print("Scheduled notification \(request) for itemID \(itemID)")
+        }
     }
 }
 
