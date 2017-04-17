@@ -77,9 +77,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         if switchControl.isOn {
             let center = UNUserNotificationCenter.current()
-            center.requestAuthorization(options: [.alert, .sound]) {
-                granted, error in /* do nothing */
-            }
+            center.requestAuthorization(options: [.alert, .sound]) {granted, error in /* do nothing */}
         }
     }
 
