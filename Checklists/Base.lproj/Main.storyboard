@@ -334,6 +334,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="datePicker" destination="Hpp-aR-NHR" id="Rhg-uF-mqY"/>
+                        <outlet property="datePickerCell" destination="U5z-2i-YF8" id="Q42-o5-pEu"/>
                         <outlet property="doneBarButton" destination="r1x-9S-ztY" id="JAH-eR-ojo"/>
                         <outlet property="dueDateLabel" destination="ATa-8y-mjd" id="m3e-Zv-Qac"/>
                         <outlet property="shouldRemindSwitch" destination="hH3-6N-hJx" id="wVP-ek-ZY6"/>
@@ -341,6 +343,31 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eDe-vV-A38" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="U5z-2i-YF8">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="217"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U5z-2i-YF8" id="yit-8E-sAJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="217"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hpp-aR-NHR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="514111751.39742303">
+                                    <!--2017-04-17 88:49:11 ДП +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="dateChanged:" destination="3Sf-mx-fme" eventType="valueChanged" id="wzy-M5-7K7"/>
+                                </connections>
+                            </datePicker>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Hpp-aR-NHR" secondAttribute="trailing" id="7NE-UT-Dqg"/>
+                            <constraint firstAttribute="bottom" secondItem="Hpp-aR-NHR" secondAttribute="bottom" id="ENd-gW-lJC"/>
+                            <constraint firstItem="Hpp-aR-NHR" firstAttribute="top" secondItem="yit-8E-sAJ" secondAttribute="top" id="Qgx-xJ-n6J"/>
+                            <constraint firstItem="Hpp-aR-NHR" firstAttribute="leading" secondItem="yit-8E-sAJ" secondAttribute="leading" id="Rwn-aG-VGb"/>
+                        </constraints>
+                    </tableViewCellContentView>
+                </tableViewCell>
             </objects>
             <point key="canvasLocation" x="2247.1999999999998" y="42.728635682158924"/>
         </scene>
