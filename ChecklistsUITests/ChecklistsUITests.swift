@@ -29,6 +29,46 @@ class ChecklistsUITests: XCTestCase {
     }
     
     func testExample() {
+        
+        let cells = app.tables.cells
+        cells.elementBoundByIndex(0).tap()
+        XCUIDevice.shared().orientation = .faceUp
+        XCUIDevice.shared().orientation = .faceUp
+        
+        let app = app2
+        app.navigationBars["Row1"].children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
+        app.navigationBars["Checklists.AllListsView"].buttons["Add"].tap()
+        
+        let app2 = app
+        app2.tables.cells.textFields["Name of the List"].tap()
+        app2.menus.menuItems["Paste"].tap()
+        app.navigationBars["Add Checklist"].buttons["Done"].tap()
+        
+        let app = XCUIApplication()
+        let rowNavigationBar = app.navigationBars["Row"]
+        rowNavigationBar.buttons["Add"].tap()
+        
+        let rKey = app.keys["R"]
+        rKey.tap()
+        rKey.tap()
+        
+        let tablesQuery = app.tables
+        let textField = tablesQuery.children(matching: .cell).element(boundBy: 0).children(matching: .textField).element
+        textField.typeText("Re")
+        
+        let mKey = app.keys["m"]
+        mKey.tap()
+        mKey.tap()
+        textField.typeText("mi")
+        app.otherElements["Remind"].tap()
+        tablesQuery.staticTexts["Apr 17, 2017, 2:56 PM"].tap()
+        tablesQuery.pickerWheels["56 minutes"].tap()
+        tablesQuery.switches["Remind Me"].tap()
+        app.navigationBars["Add Item"].buttons["Done"].tap()
+        rowNavigationBar.children(matching: .button).matching(identifier: "Back").element(boundBy: 0).tap()
+        
+        
+        
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
